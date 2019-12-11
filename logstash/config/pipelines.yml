@@ -1,4 +1,5 @@
 - pipeline.id: message_log_pipeline
+  path.config: "usr/share/logstash/pipeline/*"
   pipeline.workers: 4
   pipeline.output.workers: 4
   pipeline.batch.size: 10000
