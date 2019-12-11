@@ -1,0 +1,4 @@
+pipeline.workers: 24
+pipeline.output.workers: 24
+pipeline.batch.size: 10000
+pipeline.batch.delay: 10
