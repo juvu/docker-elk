@@ -12,11 +12,13 @@ services:
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
       - /mnt/es:/usr/share/elasticsearch/data
+      - /home/esdata_1:/usr/share/elasticsearch/data1
+      - /home/esdata_2:/usr/share/elasticsearch/data2
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx20356m -Xms20356m"
+      ES_JAVA_OPTS: "-Xmx23456m -Xms23456m"
       ELASTIC_PASSWORD: changeme
       # Use single node discovery in order to disable production mode and avoid bootstrap checks
       # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
