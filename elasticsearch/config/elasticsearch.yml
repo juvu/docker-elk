@@ -5,6 +5,9 @@
 cluster.name: "docker-cluster"
 network.host: 0.0.0.0
 
+path.data: /usr/share/elasticsearch/data,/usr/share/elasticsearch/data1,/usr/share/elasticsearch/data2
+
+
 ## X-Pack settings
 ## see https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-xpack.html
 #
