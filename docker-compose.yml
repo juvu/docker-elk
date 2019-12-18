@@ -16,14 +16,33 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx10356m -Xms10356m"
+      ES_JAVA_OPTS: "-Xmx20356m -Xms20356m"
       ELASTIC_PASSWORD: changeme
       # Use single node discovery in order to disable production mode and avoid bootstrap checks
       # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       discovery.type: single-node
     networks:
       - elk
+logstash:
+    build:
+      context: logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      #- type: bind
+      #  source: ./logstash/config/pipelines.yml
+      #  target: /usr/share/logstash/config/pipelines.yml
+      #  read_only: true
 
+      - type: bind
+        source: ./logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+      - /data/input:/home
   
 
  
