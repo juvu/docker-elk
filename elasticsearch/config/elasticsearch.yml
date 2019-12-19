@@ -8,13 +8,10 @@ network.host: 0.0.0.0
 path.data: /usr/share/elasticsearch/data,/usr/share/elasticsearch/data1,/usr/share/elasticsearch/data2
 indices.memory.index_buffer_size: 15%
 
-## Threadpool Settings ##
-thread_pool.index.queue_size: 100000
-thread_pool.bulk.queue_size: 500
-thread_pool.search.queue_size: 100000
-thread_pool.listener.queue_size: 1000
 
-http.max_content_length: 500mb
+thread_pool.bulk.size: 24
+thread_pool.bulk.queue_size: 1000
+
 transport.tcp.compress: true
 
 
