@@ -1,7 +1,7 @@
 version: '3.2'
 
 services:
-  elasticsearch:
+  esmaster01:
     build:
       context: elasticsearch/
       args:
@@ -11,51 +11,80 @@ services:
         source: ./elasticsearch/config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
-      - /mnt/es:/usr/share/elasticsearch/data
-      - /home/esdata_1:/usr/share/elasticsearch/data1
-      - /home/esdata_2:/usr/share/elasticsearch/data2
+      - /mnt/es:/usr/share/elasticsearch/data        
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx14456m -Xms1456m"
-      ELASTIC_PASSWORD: changeme
+      ES_JAVA_OPTS: "-Xmx4456m -Xms456m"
+      - node.master=true
+      - node.data=true
+      - node.name=esmaster01
+      - cluster.initial_master_nodes=esmaster01,esmaster02,esmaster03
+      - discovery.seed_hosts=esmaster01,esmaster02
+
+
+      
       # Use single node discovery in order to disable production mode and avoid bootstrap checks
-      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-      discovery.type: single-node
     networks:
       - elk
-      
-  logstash:
+    esmaster02:
     build:
-      context: logstash/
+      context: elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - type: bind
-        source: ./logstash/config/logstash.yml
-        target: /usr/share/logstash/config/logstash.yml
-        read_only: true
-      #- type: bind
-      #  source: ./logstash/config/pipelines.yml
-      #  target: /usr/share/logstash/config/pipelines.yml
-      #  read_only: true
-
-      - type: bind
-        source: ./logstash/pipeline
-        target: /usr/share/logstash/pipeline
-        read_only: true
-      - /data/input:/home
-
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true      
+      - /home/esdata_1:/usr/share/elasticsearch/data
     ports:
-      - "5000:5000"
-      - "9600:9600"
+      - "9201:9200"
+      - "9301:9300"
     environment:
-      LS_JAVA_OPTS: "-Xmx1256m -Xms1256m"
+      ES_JAVA_OPTS: "-Xmx4456m -Xms456m"
+      - node.master=true
+      - node.data=true
+      - node.name=esmaster02
+      - cluster.initial_master_nodes=esmaster01,esmaster02,esmaster03
+      - discovery.seed_hosts=esmaster01,esmaster02,esmaster03
+
+
+
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
     networks:
       - elk
-    depends_on:
-      - elasticsearch
+    esmaster03:
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true      
+      - /home/esdata_2:/usr/share/elasticsearch/data
+    ports:
+      - "9202:9200"
+      - "9302:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx4456m -Xms456m"
+      - node.master=true
+      - node.data=true
+      - node.name=esmaster03
+      - cluster.initial_master_nodes=esmaster01,esmaster02,esmaster03
+      - discovery.seed_hosts=esmaster01,esmaster02,esmaster03
+
+
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+    networks:
+      - elk
+      
+ 
 
 
  
