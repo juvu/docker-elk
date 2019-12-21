@@ -28,7 +28,7 @@ services:
       # Use single node discovery in order to disable production mode and avoid bootstrap checks
     networks:
       - elk
-    esmaster02:
+  esmaster02:
     build:
       context: elasticsearch/
       args:
@@ -56,7 +56,7 @@ services:
       # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
     networks:
       - elk
-    esmaster03:
+  esmaster03:
     build:
       context: elasticsearch/
       args:
