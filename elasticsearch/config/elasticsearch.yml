@@ -5,7 +5,7 @@
 cluster.name: "docker-cluster"
 network.host: 0.0.0.0
 
-path.data: /usr/share/elasticsearch/data,/usr/share/elasticsearch/data1,/usr/share/elasticsearch/data2
+path.data: /usr/share/elasticsearch/data
 indices.memory.index_buffer_size: 15%
 
 
