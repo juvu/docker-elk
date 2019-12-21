@@ -16,7 +16,7 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx4456m -Xms456m"
+      - "ES_JAVA_OPTS=-Xms4256m -Xmx4256m"
       - node.master=true
       - node.data=true
       - node.name=esmaster01
@@ -43,7 +43,7 @@ services:
       - "9201:9200"
       - "9301:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx4456m -Xms456m"
+      - "ES_JAVA_OPTS=-Xms4256m -Xmx4256m"
       - node.master=true
       - node.data=true
       - node.name=esmaster02
@@ -71,7 +71,7 @@ services:
       - "9202:9200"
       - "9302:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx4456m -Xms456m"
+      - "ES_JAVA_OPTS=-Xms4256m -Xmx4256m"
       - node.master=true
       - node.data=true
       - node.name=esmaster03
