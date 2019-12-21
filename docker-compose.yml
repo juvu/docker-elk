@@ -20,78 +20,10 @@ services:
       - node.master=true
       - node.data=true
       - node.name=esmaster01
-      - cluster.initial_master_nodes=esmaster01,esmaster02,esmaster03
-      - discovery.seed_hosts=esmaster01,esmaster02,esmaster03
-
-
-      
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks
-    networks:
-      - elk
-  esmaster02:
-    build:
-      context: elasticsearch/
-      args:
-        ELK_VERSION: $ELK_VERSION
-    volumes:
-      - type: bind
-        source: ./elasticsearch/config/elasticsearch.yml
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-        read_only: true      
-      - /home/esdata_1:/usr/share/elasticsearch/data
-    ports:
-      - "9201:9200"
-      - "9301:9300"
-    environment:
-      - "ES_JAVA_OPTS=-Xms4256m -Xmx4256m"
-      - node.master=true
-      - node.data=true
-      - node.name=esmaster02
-      - cluster.initial_master_nodes=esmaster01,esmaster02,esmaster03
-      - discovery.seed_hosts=esmaster01,esmaster02,esmaster03
-
-
-
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks
-      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-    networks:
-      - elk
-  esmaster03:
-    build:
-      context: elasticsearch/
-      args:
-        ELK_VERSION: $ELK_VERSION
-    volumes:
-      - type: bind
-        source: ./elasticsearch/config/elasticsearch.yml
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-        read_only: true      
-      - /home/esdata_2:/usr/share/elasticsearch/data
-    ports:
-      - "9202:9200"
-      - "9302:9300"
-    environment:
-      - "ES_JAVA_OPTS=-Xms4256m -Xmx4256m"
-      - node.master=true
-      - node.data=true
-      - node.name=esmaster03
-      - cluster.initial_master_nodes=esmaster01,esmaster02,esmaster03
-      - discovery.seed_hosts=esmaster01,esmaster02,esmaster03
-
-
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks
-      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-    networks:
-      - elk
-      
- 
+      - cluster.initial_master_nodes=172.19.83.78
 
 
  
-
-networks:
-  elk:
-    driver: bridge
 
 volumes:
   elasticsearch:
