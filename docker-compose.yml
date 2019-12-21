@@ -21,7 +21,7 @@ services:
       - node.data=true
       - node.name=esmaster01
       - cluster.initial_master_nodes=esmaster01,esmaster02,esmaster03
-      - discovery.seed_hosts=esmaster01,esmaster02
+      - discovery.seed_hosts=esmaster01,esmaster02,esmaster03
 
 
       
