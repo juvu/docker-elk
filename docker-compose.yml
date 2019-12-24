@@ -17,6 +17,8 @@ services:
       - "9300:9300"
     environment:
       - "ES_JAVA_OPTS=-Xms15256m -Xmx15256m"
+      discovery.type: single-node
+
       
       
       
