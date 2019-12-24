@@ -13,7 +13,7 @@ services:
         read_only: true
       - /home/esdata_0:/usr/share/elasticsearch/data        
     ports:
-      - "9201:9200"
+      - "9200:9200"
       - "9300:9300"
     environment:
       - "ES_JAVA_OPTS=-Xms15256m -Xmx15256m"
