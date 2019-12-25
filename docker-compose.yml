@@ -1,7 +1,7 @@
 version: '3.2'
 
 services:
-  esmaster01:
+  eszi1:
     build:
       context: elasticsearch/
       args:
