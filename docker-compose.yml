@@ -11,10 +11,10 @@ services:
         source: ./elasticsearch/config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
-      - /home/esdata_0:/usr/share/elasticsearch/data        
+      - /home/esdata_2:/usr/share/elasticsearch/data        
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9201:9200"
+      - "9301:9300"
     environment:      
       - node.name=zi1
       # 是否可以成为master节点
