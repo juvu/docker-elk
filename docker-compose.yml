@@ -15,14 +15,14 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-    environment:
-      - "ES_JAVA_OPTS=-Xms5256m -Xmx5256m"
-      - "node.name=master"
+    environment:      
+      - node.name=master
       # 是否可以成为master节点
-      - "node.master=true"
+      - node.master=true
       # 是否允许该节点存储数据,默认开启
-      - "node.data=true"
-      - cluster.initial_master_nodes: 172.19.83.78
+      - node.data=true
+      - cluster.initial_master_nodes=172.19.83.78
+      - "ES_JAVA_OPTS=-Xms5256m -Xmx5256m"
 
       
       
