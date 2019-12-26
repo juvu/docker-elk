@@ -19,10 +19,11 @@ services:
       - node.name=master
       # 是否可以成为master节点
       - node.master=true
+      - network.publish_host=172.19.83.78
       # 是否允许该节点存储数据,默认开启
       - node.data=true
       - cluster.initial_master_nodes=172.19.83.78
-      - "ES_JAVA_OPTS=-Xms5256m -Xmx5256m"
+      - "ES_JAVA_OPTS=-Xms7256m -Xmx7256m"
 
       
       
